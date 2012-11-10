@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    Navoq
+ * @package     Navoq_CustomerUniversalPassword
+ */
+-->
+<config>
+    <modules>
+        <Navoq_CustomerUniversalPassword>
+            <version>1.0.0.0</version>
+        </Navoq_CustomerUniversalPassword>
+    </modules>
+    <global>
+        <models>
+            <navoq_customeruniversalpassword>
+                <class>Navoq_CustomerUniversalPassword_Model</class>
+                <resourceModel>navoq_customeruniversalpassword_resource</resourceModel>
+            </navoq_customeruniversalpassword>
+            <navoq_customeruniversalpassword_resource>
+                <class>Navoq_CustomerUniversalPassword_Model_Resource</class>
+                <entities>
+                    <nonce>
+                        <table>navoq_cup_nonce</table>
+                    </nonce>
+                </entities>
+            </navoq_customeruniversalpassword_resource>
+        </models>
+        <blocks>
+            <navoq_customeruniversalpassword>
+                <class>Navoq_CustomerUniversalPassword_Block</class>
+            </navoq_customeruniversalpassword>
+        </blocks>
+        <helpers>
+            <navoq_customeruniversalpassword>
+                <class>Navoq_CustomerUniversalPassword_Helper</class>
+            </navoq_customeruniversalpassword>
+        </helpers>
+        <resources>
+            <navoq_customeruniversalpassword_setup>
+                <setup>
+                    <module>Navoq_CustomerUniversalPassword</module>
+                    <class>Navoq_CustomerUniversalPassword_Model_Resource_Setup</class>
+                </setup>
+            </navoq_customeruniversalpassword_setup>
+        </resources>
+    </global>
+    <frontend>
+        <routers>
+            <navoq_customeruniversalpassword>
+                <use>standard</use>
+                <args>
+                    <module>Navoq_CustomerUniversalPassword</module>
+                    <frontName>navoq_customeruniversalpassword</frontName>
+                </args>
+            </navoq_customeruniversalpassword>
+        </routers>
+        <layout>
+            <updates>
+                <navoq_customeruniversalpassword>
+                    <file>navoq_customeruniversalpassword.xml</file>
+                </navoq_customeruniversalpassword>
+            </updates>
+        </layout>
+    </frontend>
+</config>
