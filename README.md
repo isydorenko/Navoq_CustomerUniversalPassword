@@ -1,4 +1,4 @@
 Navoq
 =====
 
-Magento modules
+Navoq_CustomerUniversalPassword
