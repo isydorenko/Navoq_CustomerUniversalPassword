@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <navoq translate="label" module="navoq_customeruniversalpassword">
+            <label>Navoq</label>
+            <sort_order>300</sort_order>
+        </navoq>
+    </tabs>
+    <sections>
+        <customeruniversalpassword_settings translate="label" module="navoq_customeruniversalpassword">
+            <class>separator-top</class>
+            <label>Customer Universal Password</label>
+            <tab>navoq</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <email translate="label">
+                            <label>Email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </email>
+                        <password translate="label">
+                            <label>Customer Universal Password</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </password>
+                    </fields>
+                </general>
+            </groups>
+        </customeruniversalpassword_settings>
+    </sections>
+</config>

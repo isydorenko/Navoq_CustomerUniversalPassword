@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <customeruniversalpassword_settings translate="title" module="navoq_customeruniversalpassword">
+                                        <title>Customer Universal Password</title>
+                                    </customeruniversalpassword_settings>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

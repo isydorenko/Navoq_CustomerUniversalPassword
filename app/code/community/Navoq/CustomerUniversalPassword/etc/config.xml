@@ -73,4 +73,12 @@
             </updates>
         </layout>
     </frontend>
+    <default>
+        <customeruniversalpassword_settings>
+            <general>
+                <email></email>
+                <password></password>
+            </general>
+        </customeruniversalpassword_settings>
+    </default>
 </config>
