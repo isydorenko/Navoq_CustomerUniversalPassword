@@ -1,11 +1,11 @@
 <?php
 /**
- * Data helper
+ * Setup model
  *
  * @category    Navoq
  * @package     Navoq_CustomerUniversalPassword
  * @author      Navoq Team <team@navoq.com>
  */
-class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstract
+class Navoq_CustomerUniversalPassword_Model_Resource_Setup extends Mage_Core_Model_Resource_Setup
 {
 }
