@@ -21,7 +21,7 @@
                 <class>Navoq_CustomerUniversalPassword_Model_Resource</class>
                 <entities>
                     <nonce>
-                        <table>navoq_cup_nonce</table>
+                        <table>navoq_customer_universal_password_nonce</table>
                     </nonce>
                 </entities>
             </navoq_customeruniversalpassword_resource>
