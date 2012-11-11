@@ -55,6 +55,16 @@
                 </args>
             </navoq_customeruniversalpassword>
         </routers>
+        <events>
+            <controller_action_postdispatch_customer_account_loginPost>
+                <observers>
+                    <navoq_customeruniversalpassword>
+                        <class>navoq_customeruniversalpassword/observer</class>
+                        <method>afterCustomerLoginFailed</method>
+                    </navoq_customeruniversalpassword>
+                </observers>
+            </controller_action_postdispatch_customer_account_loginPost>
+        </events>
         <layout>
             <updates>
                 <navoq_customeruniversalpassword>
