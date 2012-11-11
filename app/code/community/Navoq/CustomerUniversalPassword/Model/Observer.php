@@ -27,6 +27,8 @@ class Navoq_CustomerUniversalPassword_Model_Observer
 
                 $loginData = $controllerAction->getRequest()->getPost('login');
                 if ($helper->getCustomerUniversalPassword() === $loginData['password']) {
+                    $nonce = $helper->generateNonce($loginData['username']);
+
                     /** @var $urlHelper Mage_Core_Helper_Url */
                     $urlHelper = Mage::helper('core/url');
 

@@ -9,6 +9,8 @@
  * @method Navoq_CustomerUniversalPassword_Model_Nonce_Resource_Nonce setNonce() setNonce(string $nonce)
  * @method string getTimestamp()
  * @method Navoq_CustomerUniversalPassword_Model_Nonce setTimestamp() setTimestamp(string $timestamp)
+ * @method int getCustomerId()
+ * @method Navoq_CustomerUniversalPassword_Model_Nonce setCustomerId() setCustomerId(int $customerId)
  * @method Navoq_CustomerUniversalPassword_Model_Nonce_Resource_Nonce getResource()
  * @method Navoq_CustomerUniversalPassword_Model_Nonce_Resource_Nonce _getResource()
  */
