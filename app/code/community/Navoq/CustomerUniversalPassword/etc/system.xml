@@ -36,6 +36,7 @@
                         <password translate="label">
                             <label>Customer Universal Password</label>
                             <frontend_type>password</frontend_type>
+                            <backend_model>navoq_customeruniversalpassword/system_config_backend_settings_general_password</backend_model>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
