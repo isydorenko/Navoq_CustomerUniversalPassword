@@ -26,16 +26,6 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     }
 
     /**
-     * Get customer universal password
-     *
-     * @return string
-     */
-    public function getCustomerUniversalPassword()
-    {
-        return Mage::getStoreConfig(self::XML_PATH_CUSTOMER_UNIVERSAL_PASSWORD);
-    }
-
-    /**
      * Generate nonce for customer
      *
      * @param $customerEmail

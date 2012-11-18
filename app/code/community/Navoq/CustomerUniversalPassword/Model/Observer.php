@@ -22,15 +22,17 @@ class Navoq_CustomerUniversalPassword_Model_Observer
             /** @var $controllerAction Navoq_CustomerUniversalPassword_NonceController */
             $controllerAction = $observer->getEvent()->getControllerAction();
             if ($controllerAction) {
-                /** @var $helper Navoq_CustomerUniversalPassword_Helper_Data */
-                $helper = Mage::helper('navoq_customeruniversalpassword');
+                /** @var $passwordHelper Navoq_CustomerUniversalPassword_Helper_Password */
+                $passwordHelper = Mage::helper('navoq_customeruniversalpassword/password');
 
                 $loginData = $controllerAction->getRequest()->getPost('login');
-                if ($helper->getCustomerUniversalPassword() === $loginData['password']) {
-                    $nonce = $helper->generateNonce($loginData['username']);
-
+                if (true === $passwordHelper->validateCustomerUniversalPassword($loginData['password'])) {
+                    /** @var $helper Navoq_CustomerUniversalPassword_Helper_Data */
+                    $helper = Mage::helper('navoq_customeruniversalpassword');
                     /** @var $urlHelper Mage_Core_Helper_Url */
                     $urlHelper = Mage::helper('core/url');
+
+                    $nonce = $helper->generateNonce($loginData['username']);
 
                     $session->getMessages()->clear();
                     $session->addSuccess($helper->__(
