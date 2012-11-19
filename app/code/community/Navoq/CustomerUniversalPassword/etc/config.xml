@@ -44,6 +44,15 @@
                 </setup>
             </navoq_customeruniversalpassword_setup>
         </resources>
+        <template>
+            <email>
+                <customeruniversalpassword_settings_email_template translate="label" module="navoq_customeruniversalpassword">
+                    <label>Temporary Link</label>
+                    <file>navoq/customer_universal_password/temporary_link.html</file>
+                    <type>html</type>
+                </customeruniversalpassword_settings_email_template>
+            </email>
+        </template>
     </global>
     <frontend>
         <routers>
@@ -79,6 +88,10 @@
                 <email></email>
                 <password></password>
             </general>
+            <email>
+                <identity>general</identity>
+                <template>customeruniversalpassword_settings_email_template</template>
+            </email>
         </customeruniversalpassword_settings>
     </default>
 </config>

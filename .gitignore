@@ -29,7 +29,6 @@ app/etc/config.xml
 app/etc/local.xml.additional
 app/etc/local.xml.template
 app/.htaccess
-app/locale/en_US/
 app/Mage.php
 cron.php
 cron.sh

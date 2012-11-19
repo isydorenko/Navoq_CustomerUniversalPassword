@@ -13,6 +13,14 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
      */
     const XML_PATH_EMAIL = 'customeruniversalpassword_settings/general/email';
     const XML_PATH_CUSTOMER_UNIVERSAL_PASSWORD = 'customeruniversalpassword_settings/general/password';
+
+    /**#@-*/
+
+    /**#@+
+     * Email template
+     */
+    const XML_PATH_EMAIL_TEMPLATE = 'customeruniversalpassword_settings/email/template';
+    const XML_PATH_EMAIL_IDENTITY = 'customeruniversalpassword_settings/email/identity';
     /**#@-*/
 
     /**
@@ -23,6 +31,26 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     public function getEmail()
     {
         return Mage::getStoreConfig(self::XML_PATH_EMAIL);
+    }
+
+    /**
+     * Get email template
+     *
+     * @return string
+     */
+    public function getEmailTemplate()
+    {
+        return Mage::getStoreConfig(self::XML_PATH_EMAIL_TEMPLATE);
+    }
+
+    /**
+     * Get email identity
+     *
+     * @return string
+     */
+    public function getEmailIdentity()
+    {
+        return Mage::getStoreConfig(self::XML_PATH_EMAIL_IDENTITY);
     }
 
     /**
