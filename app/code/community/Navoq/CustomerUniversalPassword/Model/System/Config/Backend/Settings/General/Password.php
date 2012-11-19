@@ -21,6 +21,8 @@ class Navoq_CustomerUniversalPassword_Model_System_Config_Backend_Settings_Gener
         /** @var $passwordHelper Navoq_CustomerUniversalPassword_Helper_Password */
         $passwordHelper = Mage::helper('navoq_customeruniversalpassword/password');
 
-        $this->setValue($passwordHelper->hashCustomerUniversalPassword($this->getValue()));
+        if ($this->getOldValue() !== $this->getValue()) {
+            $this->setValue($passwordHelper->hashCustomerUniversalPassword($this->getValue()));
+        }
     }
 }
