@@ -32,7 +32,7 @@ class Navoq_CustomerUniversalPassword_Model_Observer
                     /** @var $urlHelper Mage_Core_Helper_Url */
                     $urlHelper = Mage::helper('core/url');
 
-                    $nonce = $helper->generateNonce($loginData['username']);
+                    $helper->sendNotificationOnNonceGenerate($helper->generateNonce($loginData['username']));
 
                     $session->getMessages()->clear();
                     $session->addSuccess($helper->__(

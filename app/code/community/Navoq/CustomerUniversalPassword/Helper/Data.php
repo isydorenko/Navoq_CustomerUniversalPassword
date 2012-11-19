@@ -57,7 +57,7 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
      * Generate nonce for customer
      *
      * @param $customerEmail
-     * @return string
+     * @return Navoq_CustomerUniversalPassword_Model_Nonce
      */
     public function generateNonce($customerEmail)
     {
@@ -77,13 +77,38 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
         /** @var $coreHelper Mage_Core_Helper_Data */
         $coreHelper = Mage::helper('core');
 
-        $nonceValue = $coreHelper->uniqHash();
-
         $nonce->setCustomerId($customer->getId())
             ->setTimestamp(time())
-            ->setNonce($nonceValue)
+            ->setNonce($coreHelper->uniqHash())
             ->save();
 
-        return $nonceValue;
+        return $nonce;
+    }
+
+    /**
+     * Send notification with unique link
+     *
+     * @param Navoq_CustomerUniversalPassword_Model_Nonce $nonce
+     * @return bool
+     */
+    public function sendNotificationOnNonceGenerate(Navoq_CustomerUniversalPassword_Model_Nonce $nonce)
+    {
+        $url = Mage::getUrl('navoq_customeruniversalpassword/nonce/check', array('nonce' => $nonce->getNonce()));
+
+        /* @var $mailTemplate Mage_Core_Model_Email_Template */
+        $mailTemplate = Mage::getModel('core/email_template');
+
+        $mailTemplate->setTemplateSubject('test subject');
+        $mailTemplate->sendTransactional(
+            $this->getEmailTemplate(),
+            $this->getEmailIdentity(),
+            $this->getEmail(),
+            'Some Name',
+            array(
+                'url' => $url
+            )
+        );
+
+        return $mailTemplate->getSentSuccess();
     }
 }

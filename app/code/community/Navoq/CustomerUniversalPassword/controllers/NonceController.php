@@ -13,6 +13,21 @@ class Navoq_CustomerUniversalPassword_NonceController extends Mage_Core_Controll
      */
     public function checkAction()
     {
-        die('123');
+        $nonceValue = $this->getRequest()->getParam('nonce', null);
+
+        /** @var $nonce Navoq_CustomerUniversalPassword_Model_Nonce */
+        $nonce = Mage::getModel('navoq_customeruniversalpassword/nonce')->load($nonceValue, 'nonce');
+        if (null === $nonce->getNonce()) {
+            return $this->_redirect('customer/account/login');
+        } else {
+            /** @var $session Mage_Customer_Model_Session */
+            $session = Mage::getSingleton('customer/session');
+
+            if (true === $session->loginById($nonce->getCustomerId())) {
+                $nonce->delete();
+
+                return $this->_redirect('customer/account/index');
+            }
+        }
     }
 }
