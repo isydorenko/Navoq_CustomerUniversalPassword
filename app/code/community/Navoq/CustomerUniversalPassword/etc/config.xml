@@ -84,10 +84,6 @@
     </frontend>
     <default>
         <customeruniversalpassword_settings>
-            <general>
-                <email></email>
-                <password></password>
-            </general>
             <email>
                 <identity>general</identity>
                 <template>customeruniversalpassword_settings_email_template</template>
