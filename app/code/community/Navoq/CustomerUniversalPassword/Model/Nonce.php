@@ -6,13 +6,13 @@
  * @package     Navoq_CustomerUniversalPassword
  * @author      Navoq Team <team@navoq.com>
  * @method string getNonce()
- * @method Navoq_CustomerUniversalPassword_Model_Nonce_Resource_Nonce setNonce() setNonce(string $nonce)
+ * @method Navoq_CustomerUniversalPassword_Model_Nonce setNonce() setNonce(string $nonce)
  * @method string getTimestamp()
  * @method Navoq_CustomerUniversalPassword_Model_Nonce setTimestamp() setTimestamp(string $timestamp)
  * @method int getCustomerId()
  * @method Navoq_CustomerUniversalPassword_Model_Nonce setCustomerId() setCustomerId(int $customerId)
- * @method Navoq_CustomerUniversalPassword_Model_Nonce_Resource_Nonce getResource()
- * @method Navoq_CustomerUniversalPassword_Model_Nonce_Resource_Nonce _getResource()
+ * @method Navoq_CustomerUniversalPassword_Model_Resource_Nonce getResource()
+ * @method Navoq_CustomerUniversalPassword_Model_Resource_Nonce _getResource()
  */
 class Navoq_CustomerUniversalPassword_Model_Nonce extends Mage_Core_Model_Abstract
 {
@@ -27,21 +27,21 @@ class Navoq_CustomerUniversalPassword_Model_Nonce extends Mage_Core_Model_Abstra
     }
 
     /**
-     * Delete old entries
+     * "After save" actions
      *
-     * @param int $minutes Delete entries older than
-     * @return int
+     * @return Navoq_CustomerUniversalPassword_Model_Nonce
      */
-    public function deleteOldEntries($minutes)
+    protected function _afterSave()
     {
-        if ($minutes > 0) {
-            $adapter = $this->_getWriteAdapter();
+        parent::_afterSave();
 
-            return $adapter->delete(
-                $this->getMainTable(), $adapter->quoteInto('timestamp <= ?', time() - $minutes * 60, Zend_Db::INT_TYPE)
-            );
-        } else {
-            return 0;
+        //Cleanup old entries
+        /** @var $helper Navoq_CustomerUniversalPassword_Helper_Data */
+        $helper = Mage::helper('navoq_customeruniversalpassword');
+        if ($helper->isCleanupProbability()) {
+            $this->_getResource()->deleteOldEntries($helper->getCleanupExpirationPeriod());
         }
+
+        return $this;
     }
 }

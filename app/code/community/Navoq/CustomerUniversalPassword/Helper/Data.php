@@ -23,6 +23,18 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     const XML_PATH_EMAIL_IDENTITY = 'customeruniversalpassword_settings/email/identity';
     /**#@-*/
 
+    /**#@+
+     * Cleanup xpath config settings
+     */
+    const XML_PATH_CLEANUP_PROBABILITY       = 'customeruniversalpassword_settings/cleanup/probability';
+    const XML_PATH_CLEANUP_EXPIRATION_PERIOD = 'customeruniversalpassword_settings/cleanup/expiration_period';
+    /**#@-*/
+
+    /**
+     * Cleanup expiration period in minutes
+     */
+    const CLEANUP_EXPIRATION_PERIOD_DEFAULT = 120;
+
     /**
      * Get email
      *
@@ -110,5 +122,26 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
         );
 
         return $mailTemplate->getSentSuccess();
+    }
+
+    /**
+     * Get cleanup possibility for data with lifetime property
+     *
+     * @return bool
+     */
+    public function isCleanupProbability()
+    {
+        return (bool)Mage::getStoreConfig(self::XML_PATH_CLEANUP_PROBABILITY);
+    }
+
+    /**
+     * Get cleanup expiration period value from system configuration in minutes
+     *
+     * @return int
+     */
+    public function getCleanupExpirationPeriod()
+    {
+        $minutes = (int)Mage::getStoreConfig(self::XML_PATH_CLEANUP_EXPIRATION_PERIOD);
+        return $minutes > 0 ? $minutes : self::CLEANUP_EXPIRATION_PERIOD_DEFAULT;
     }
 }
