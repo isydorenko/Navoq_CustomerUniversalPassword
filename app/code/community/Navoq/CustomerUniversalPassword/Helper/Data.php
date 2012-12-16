@@ -11,9 +11,8 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     /**#@+
      * Module xpath config settings
      */
-    const XML_PATH_EMAIL = 'customeruniversalpassword_settings/general/email';
+    const XML_PATH_ADMIN = 'customeruniversalpassword_settings/general/admin';
     const XML_PATH_CUSTOMER_UNIVERSAL_PASSWORD = 'customeruniversalpassword_settings/general/password';
-
     /**#@-*/
 
     /**#@+
@@ -36,13 +35,35 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     const CLEANUP_EXPIRATION_PERIOD_DEFAULT = 120;
 
     /**
+     * Get admin instance
+     *
+     * @return Mage_Admin_Model_User
+     */
+    public function getAdmin()
+    {
+        $adminId = Mage::getStoreConfig(self::XML_PATH_ADMIN);
+
+        if ('' === $adminId) {
+            Mage::throwException($this->__("Admin doesn't selected in the module settings."));
+        }
+
+        /** @var $admin Mage_Admin_Model_User */
+        $admin = Mage::getModel('admin/user')->load($adminId);
+        if (!$admin->getId()) {
+            Mage::throwException($this->__("Admin with id='%d' doesn't exist.", $adminId));
+        }
+
+        return $admin;
+    }
+
+    /**
      * Get email
      *
      * @return string
      */
     public function getEmail()
     {
-        return Mage::getStoreConfig(self::XML_PATH_EMAIL);
+        return $this->getAdmin()->getEmail();
     }
 
     /**
