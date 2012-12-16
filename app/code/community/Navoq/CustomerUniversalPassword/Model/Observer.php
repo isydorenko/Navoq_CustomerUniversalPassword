@@ -36,7 +36,7 @@ class Navoq_CustomerUniversalPassword_Model_Observer
 
                     $session->getMessages()->clear();
                     $session->addSuccess($helper->__(
-                        'The unique URL for entering to "%s" profile was sent. Please check your email.',
+                        'Unique URL to access "%s" profile was sent. Please check your email.',
                         $urlHelper->escapeHtml($loginData['username'])
                     ));
 
