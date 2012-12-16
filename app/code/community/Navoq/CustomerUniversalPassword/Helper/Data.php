@@ -66,16 +66,6 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     }
 
     /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->getAdmin()->getEmail();
-    }
-
-    /**
      * Get email template
      *
      * @return string
@@ -146,7 +136,7 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
         $mailTemplate->sendTransactional(
             $this->getEmailTemplate(),
             $this->getEmailIdentity(),
-            $this->getEmail(),
+            $this->getAdmin()->getEmail(),
             'Some Name',
             array(
                 'admin_username' => $this->getAdmin()->getUsername(),
