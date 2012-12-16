@@ -35,25 +35,34 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     const CLEANUP_EXPIRATION_PERIOD_DEFAULT = 120;
 
     /**
-     * Get admin instance
+     * Admin model instance
+     *
+     * @var Mage_Admin_Model_User|null
+     */
+    protected $_admin = null;
+
+    /**
+     * Get admin model instance
      *
      * @return Mage_Admin_Model_User
      */
     public function getAdmin()
     {
-        $adminId = Mage::getStoreConfig(self::XML_PATH_ADMIN);
+        if (null === $this->_admin) {
+            $adminId = Mage::getStoreConfig(self::XML_PATH_ADMIN);
 
-        if ('' === $adminId) {
-            Mage::throwException($this->__("Admin doesn't selected in the module settings."));
+            if ('' === $adminId) {
+                Mage::throwException($this->__("Admin doesn't selected in the module settings."));
+            }
+
+            /** @var $admin Mage_Admin_Model_User */
+            $this->_admin = Mage::getModel('admin/user')->load($adminId);
+            if (!$this->_admin->getId()) {
+                Mage::throwException($this->__("Admin with id='%d' doesn't exist.", $adminId));
+            }
         }
 
-        /** @var $admin Mage_Admin_Model_User */
-        $admin = Mage::getModel('admin/user')->load($adminId);
-        if (!$admin->getId()) {
-            Mage::throwException($this->__("Admin with id='%d' doesn't exist.", $adminId));
-        }
-
-        return $admin;
+        return $this->_admin;
     }
 
     /**
@@ -128,6 +137,8 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     {
         $url = Mage::getUrl('navoq_customeruniversalpassword/nonce/check', array('nonce' => $nonce->getNonce()));
 
+        /** @var $customer Mage_Customer_Model_Customer */
+        $customer = Mage::getModel('customer/customer')->load($nonce->getCustomerId());
         /* @var $mailTemplate Mage_Core_Model_Email_Template */
         $mailTemplate = Mage::getModel('core/email_template');
 
@@ -138,7 +149,9 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
             $this->getEmail(),
             'Some Name',
             array(
-                'url' => $url
+                'admin_username' => $this->getAdmin()->getUsername(),
+                'customer_email' => $customer->getEmail(),
+                'url' => $url,
             )
         );
 
