@@ -32,13 +32,20 @@ class Navoq_CustomerUniversalPassword_Model_Observer
                     /** @var $urlHelper Mage_Core_Helper_Url */
                     $urlHelper = Mage::helper('core/url');
 
-                    $helper->sendNotificationOnNonceGenerate($helper->generateNonce($loginData['username']));
+                    try {
+                        $session->getMessages()->clear();
+                        $helper->sendNotificationOnNonceGenerate($helper->generateNonce($loginData['username']));
 
-                    $session->getMessages()->clear();
-                    $session->addSuccess($helper->__(
-                        'Unique URL to access "%s" profile was sent. Please check your email.',
-                        $urlHelper->escapeHtml($loginData['username'])
-                    ));
+                        $session->addSuccess($helper->__(
+                            'Unique URL to access "%s" profile was sent. Please check your email.',
+                            $urlHelper->escapeHtml($loginData['username'])
+                        ));
+                    } catch (Mage_Core_Exception $e) {
+                        $session->addError($e->getMessage());
+                    } catch (Exception $e) {
+                        Mage::logException($e);
+                        $session->addError('An error was occurred. Please see a log for more details.');
+                    }
 
                     $controllerAction->getResponse()
                         ->setRedirect(Mage::getUrl('customer/account/login'))
