@@ -25,7 +25,7 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     /**#@+
      * Cleanup xpath config settings
      */
-    const XML_PATH_CLEANUP_PROBABILITY       = 'customeruniversalpassword_settings/cleanup/probability';
+    const XML_PATH_CLEANUP_ENABLED       = 'customeruniversalpassword_settings/cleanup/enabled';
     const XML_PATH_CLEANUP_EXPIRATION_PERIOD = 'customeruniversalpassword_settings/cleanup/expiration_period';
     /**#@-*/
 
@@ -149,13 +149,13 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
     }
 
     /**
-     * Get cleanup possibility for data with lifetime property
+     * Get cleanup possibility for data
      *
      * @return bool
      */
-    public function isCleanupProbability()
+    public function isCleanupEnabled()
     {
-        return (bool)Mage::getStoreConfig(self::XML_PATH_CLEANUP_PROBABILITY);
+        return (bool)Mage::getStoreConfig(self::XML_PATH_CLEANUP_ENABLED);
     }
 
     /**

@@ -38,7 +38,7 @@ class Navoq_CustomerUniversalPassword_Model_Nonce extends Mage_Core_Model_Abstra
         //Cleanup old entries
         /** @var $helper Navoq_CustomerUniversalPassword_Helper_Data */
         $helper = Mage::helper('navoq_customeruniversalpassword');
-        if ($helper->isCleanupProbability()) {
+        if ($helper->isCleanupEnabled()) {
             $this->_getResource()->deleteOldEntries($helper->getCleanupExpirationPeriod());
         }
 

@@ -1,10 +1,4 @@
 <?xml version="1.0"?>
-<!--
-/**
- * @category    Navoq
- * @package     Navoq_CustomerUniversalPassword
- */
--->
 <config>
     <modules>
         <Navoq_CustomerUniversalPassword>
@@ -88,6 +82,10 @@
                 <identity>general</identity>
                 <template>customeruniversalpassword_settings_email_template</template>
             </email>
+            <cleanup>
+                <enabled>0</enabled>
+                <expiration_period>60</expiration_period>
+            </cleanup>
         </customeruniversalpassword_settings>
     </default>
 </config>
