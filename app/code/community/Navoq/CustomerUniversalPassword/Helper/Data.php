@@ -155,7 +155,7 @@ class Navoq_CustomerUniversalPassword_Helper_Data extends Mage_Core_Helper_Abstr
      */
     public function isCleanupEnabled()
     {
-        return (bool)Mage::getStoreConfig(self::XML_PATH_CLEANUP_ENABLED);
+        return Mage::getStoreConfigFlag(self::XML_PATH_CLEANUP_ENABLED);
     }
 
     /**
